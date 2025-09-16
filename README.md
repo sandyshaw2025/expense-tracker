@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Smart Expense Tracker
 
-## Getting Started
+A full-stack expense tracking application with automated deployment, built for personal finance management.
 
-First, run the development server:
+## Overview
+Track income and expenses with detailed categorization, payment methods, and comprehensive reporting. Features real-time data sync, mobile-responsive design, and automated CI/CD deployment.
 
+## Tech Stack
+- **Frontend**: Next.js 14 with TypeScript
+- **Styling**: Tailwind CSS
+- **Database**: Supabase (PostgreSQL with Row Level Security)
+- **Authentication**: Supabase Auth (email/password)
+- **Deployment**: Vercel with automated GitHub Actions
+- **Version Control**: GitHub
+
+## Key Features
+- User authentication and secure data isolation
+- Add/edit/delete income and expense transactions
+- Comprehensive transaction details (payment method, account, entity)
+- Advanced filtering by date ranges, categories, amounts, entities
+- Quick period filters (This Month, Last Quarter, etc.)
+- Real-time financial summaries (Income, Expenses, Net)
+- Mobile-responsive design
+- Search functionality across all transaction fields
+
+## Project Structure
+src/
+├── app/
+│   └── page.tsx              # Main entry point with authentication logic
+├── components/
+│   └── ExpenseTracker.tsx    # Primary expense tracking interface
+└── lib/
+└── supabase.ts          # Database client and TypeScript definitions
+.github/
+└── workflows/
+└── deploy.yml           # Automated deployment pipeline
+## Database Schema
+**expenses table:**
+- `id` (primary key)
+- `user_id` (foreign key to auth.users)
+- `date`, `amount`, `type` (income/expense)
+- `category`, `description`, `entity`
+- `payment_method`, `payment_details`, `account_used`
+- `created_at`, `updated_at`
+
+Row Level Security ensures users only see their own data.
+
+## Development Workflow
+1. Make changes in VS Code
+2. Commit and push:
 ```bash
+   git add .
+   git commit -m "Description of changes"
+   git push
+GitHub Actions automatically builds and deploys to Vercel
+Live app updates within 2-3 minutes
+
+Environment Variables
+
+NEXT_PUBLIC_SUPABASE_URL - Supabase project URL
+NEXT_PUBLIC_SUPABASE_ANON_KEY - Supabase anonymous key
+
+Local Development
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Open http://localhost:3000
+Categories Supported
+Income: Salary, Freelance, Dividends, Investment Income, etc.
+Expenses: Housing, Utilities, Groceries, Transportation, Healthcare, Entertainment, etc.
+Payment Methods
+Cash, Check, Credit/Debit Cards, Zelle, Venmo, PayPal, Apple Pay, Bank Transfers, etc.
+Deployment
+Automatic deployment via GitHub Actions to Vercel. Environment variables configured in GitHub Secrets and Vercel dashboard.
+Future Enhancement Ideas
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Budget limits and alerts
+Receipt photo upload and parsing
+Claude AI categorization and insights
+Data export (CSV/PDF)
+Recurring transaction templates
+4. **Save the file** and **push the changes:**
+```bash
+git add .
+git commit -m "Add comprehensive project documentation"
+git push
